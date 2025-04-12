@@ -3,119 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Russcord - Профиль</title>
+    <title>Testname - Профиль</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Добавляем иконки Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="favicon.svg">
     <style>
-        /* Стили для навигации (из предыдущего кода) */
+        :root {
+            --accent-color: #8B5CF6;
+            --text-color: #FFFFFF;
+            --background-color: #1A1A1A;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Navigation styles */
         .navigation {
             display: flex;
             justify-content: space-between;
-            padding: 1.5rem 3rem;
+            align-items: center;
+            padding: 2rem 4rem;
             position: relative;
             z-index: 100;
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
-        
-        .nav-left, .nav-right {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        /* Стили для навигационных элементов */
-        .nav-item {
-            position: relative;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-            cursor: pointer;
-        }
-        
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8);
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #FFFFFF;
             text-decoration: none;
-            font-size: 1rem;
-            text-transform: capitalize; /* Первая буква заглавная */
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-link {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: opacity 0.3s ease;
             font-weight: 500;
-            transition: color 0.3s ease;
         }
-        
-        /* Эффекты при наведении на обычные элементы */
-        .nav-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.1);
+
+        .nav-link:hover {
+            opacity: 0.8;
         }
-        
-        .nav-item:hover .nav-link {
-            color: white;
+
+        /* Language selector styles */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 180px;
+            margin-left: 20px;
         }
-        /* ... */
-        
+
+        .language-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.7rem;
+            color: #FFFFFF;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .language-button span {
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .language-button img {
+            width: 28px;
+            height: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .language-option img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .language-option span {
+            flex: 1;
+        }
+
+        .language-button:hover,
+        .language-option:hover {
+            opacity: 0.8;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .language-button:hover img {
+            transform: rotate(15deg);
+        }
+
+        .language-dropdown.active {
+            display: flex;
+        }
+
+        /* Обновленные стили для профиля */
+        .profile-box {
+            width: 90%;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Стили для аватара */
+        .profile-avatar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+
+        .avatar-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.1);
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Стили для поля имени */
+        .profile-name {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .name-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            text-align: center;
+            border-radius: 10px;
+        }
+
         /* Обновленные стили для кнопок управления */
         .control-panel {
+            width: 100%;
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
-        
-        .control-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+
+        .connect-btn {
+            min-width: 200px;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            color: var(--text-color);
             border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
+
+        .connect-btn:disabled {
+            background: rgba(139, 92, 246, 0.5);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
-            color: var(--primary-color);
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
-        
+
         .control-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(139, 92, 246, 0.2);
             transform: translateY(-2px);
         }
-        
-        .control-btn.active {
-            background: var(--accent-color, #808080);
-        }
-        
-        .control-btn.muted {
-            background: rgba(255, 0, 0, 0.3);
-        }
-        
-        .connect-btn {
-            padding: 0.8rem 2rem;
-            border-radius: 20px;
-            border: none;
-            background: var(--accent-color, #808080);
-            color: var(--primary-color);
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .connect-btn:hover {
-            background: var(--secondary-color, #000);
-            transform: translateY(-2px);
-        }
-        
+
         /* Эффект пульсации */
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(236, 72, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
         }
         
         .control-btn.muted {
@@ -130,27 +291,79 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #ff3860;
-            border: 2px solid var(--secondary-color);
+            background: #EC4899;
+            border: 2px solid var(--background-color);
             display: none;
         }
         
         .control-btn.muted .status-indicator {
             display: block;
         }
+
+        /* Стили для аватара */
+        .avatar-upload {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--text-color);
+        }
+
+        .avatar-upload:hover {
+            background: rgba(139, 92, 246, 0.3);
+        }
+
+        /* Стили для поля имени */
+        .name-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .name-input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Инициалы */
+        .initials {
+            color: var(--text-color);
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
     </style>
 </head>
 <body>
     <div class="profile-container">
-        <!-- Навигация -->
+        <!-- Navigation -->
         <nav class="navigation">
-            <div class="nav-left">
+            <a href="index.html" class="logo">TESTNAME</a>
+            <div class="nav-links">
                 <a href="index.html" class="nav-link">Главная</a>
-                <a href="#" class="nav-link">о нас</a>
+                <a href="#" class="nav-link">О нас</a>
+                <a href="#" class="nav-link">Поддержка</a>
             </div>
-            <div class="nav-right">
-                <a href="#" class="nav-link">поддержка</a>
-                <a href="#" class="nav-link">язык</a>
+            <div class="language-selector">
+                <button class="language-button">
+                    <span>Язык</span>
+                    <img src="img/earth.ico" alt="Language">
+                </button>
+                <div class="language-dropdown">
+                    <a href="#" class="language-option" data-lang="ru">
+                        <img src="img/ru.png" alt="Русский">
+                        <span>Русский</span>
+                    </a>
+                    <a href="#" class="language-option" data-lang="en">
+                        <img src="img/en.png" alt="English">
+                        <span>English</span>
+                    </a>
+                    <a href="#" class="language-option" data-lang="de">
+                        <img src="img/de.png" alt="Deutsch">
+                        <span>Deutsch</span>
+                    </a>
+                    <a href="#" class="language-option" data-lang="fr">
+                        <img src="img/fr.png" alt="Français">
+                        <span>Français</span>
+                    </a>
+                </div>
             </div>
         </nav>
 
@@ -198,10 +411,84 @@
         <div class="decoration-wave"></div>
     </div>
 
+    <script src="translations.js"></script>
     <script>
-        // Прямой встроенный скрипт для надежности
         document.addEventListener('DOMContentLoaded', function() {
-            // Элементы
+            // Language selector functionality
+            const languageButton = document.querySelector('.language-button');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageOptions = document.querySelectorAll('.language-option');
+
+            // Function to update page content based on selected language
+            function updatePageContent(lang) {
+                // Update navigation links
+                document.querySelector('.nav-links').children[0].textContent = translations[lang].nav.home;
+                document.querySelector('.nav-links').children[1].textContent = translations[lang].nav.about;
+                document.querySelector('.nav-links').children[2].textContent = translations[lang].nav.support;
+                
+                // Update language button text
+                languageButton.querySelector('span').textContent = translations[lang].nav.language;
+                
+                // Update profile elements
+                document.querySelector('#nameInput').placeholder = translations[lang].profile.namePlaceholder;
+                document.querySelector('#connectBtn').textContent = translations[lang].profile.connect;
+                
+                // Store translations for dynamic content
+                window.translations = translations;
+                window.currentLang = lang;
+            }
+
+            // Load saved language
+            const savedLang = localStorage.getItem('selectedLanguage') || 'ru';
+            const savedLangText = localStorage.getItem('selectedLanguageText');
+            const savedLangImg = localStorage.getItem('selectedLanguageImg');
+            
+            // Update content with saved language
+            updatePageContent(savedLang);
+            
+            if (savedLang && savedLangText && savedLangImg) {
+                languageButton.querySelector('span').textContent = translations[savedLang].nav.language;
+                languageButton.querySelector('img').src = savedLangImg;
+            }
+
+            // Open/close dropdown on button click
+            languageButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!languageDropdown.contains(e.target) && !languageButton.contains(e.target)) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+
+            // Handle language selection
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    const langText = this.textContent.trim();
+                    const langImg = this.querySelector('img').src;
+                    
+                    // Save selected language
+                    localStorage.setItem('selectedLanguage', lang);
+                    localStorage.setItem('selectedLanguageText', langText);
+                    localStorage.setItem('selectedLanguageImg', langImg);
+                    
+                    // Update page content
+                    updatePageContent(lang);
+                    
+                    // Update button icon
+                    languageButton.querySelector('img').src = langImg;
+                    
+                    // Close dropdown
+                    languageDropdown.classList.remove('active');
+                });
+            });
+
+            // Profile functionality
             const avatar = document.getElementById('avatar');
             const avatarInput = document.getElementById('avatar-input');
             const initialsSpan = document.querySelector('.initials');
@@ -350,7 +637,7 @@
             // Удаление аватара
             avatar.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
-                if (confirm('Удалить аватар?')) {
+                if (confirm(translations[window.currentLang].profile.deleteAvatar)) {
                     avatar.style.display = 'none';
                     avatar.src = '';
                     initialsSpan.style.display = 'block';
@@ -360,25 +647,21 @@
             
             // Переход на страницу конференции
             connectBtn.addEventListener('click', function() {
-                // Дополнительное сохранение перед переходом
                 try {
                     const name = nameInput.value.trim();
                     if (name) {
                         localStorage.setItem('userName', name);
                         sessionStorage.setItem('userName', name);
-                        console.log('Имя сохранено перед переходом:', name);
                     }
                     
-                    // Анимация кнопки при переходе
-                    this.textContent = 'Подключение...';
+                    this.textContent = translations[window.currentLang].profile.connecting;
                     this.disabled = true;
                     
-                    // Перход на страницу конференции
                     setTimeout(() => {
                         window.location.href = 'conference.html';
                     }, 800);
                 } catch (e) {
-                    console.error('Ошибка при сохранении перед переходом:', e);
+                    console.error('Error during transition:', e);
                     window.location.href = 'conference.html';
                 }
             });
