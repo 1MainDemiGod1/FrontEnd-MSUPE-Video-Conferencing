@@ -10,30 +10,108 @@
     <link rel="apple-touch-icon" href="favicon.svg">
     <style>
         :root {
-            --accent-color: #8B5CF6;
-            --text-color: #FFFFFF;
-            --background-color: #1A1A1A;
+            /* Dark theme (default) */
+            --primary-bg-color: #1a1a1a;
+            --secondary-bg-color: #2a2a2a;
+            --card-bg-color: #2d2d2d;
+            --text-color: #ffffff;
+            --secondary-text-color: #ebebeb;
+            --link-color: #4dabf5;
+            --link-hover-color: #75bdff;
+            --border-color: #444444;
+            --button-bg-color: #2a74c8;
+            --button-hover-bg-color: #3986da;
+            --button-text-color: #ffffff;
+            --input-bg-color: rgba(70, 70, 70, 0.7);
+            --input-border-color: #555555;
+            --input-text-color: #ffffff;
+            --theme-icon-color: #FFFFFF;
+            --empty-card-color: #404040;
+            --nav-text-color: #f0f0f0;
+            --menu-hover-bg-color: rgba(255, 255, 255, 0.1);
+            --participant-bg-color: #252525;
+            --avatar-bg-color: #333333;
+            --avatar-text-color: #f0f0f0;
+            --status-icon-color: #5cff6a;
+            --status-icon-muted-color: #ff5c5c;
+            --user-card-border: #4dabf5;
+            --user-card-glow: rgba(77, 171, 245, 0.3);
+            --control-btn-bg: #3a3a3a;
+            --control-btn-hover-bg: #4a4a4a;
+            --control-btn-active-bg: #4080c0;
+            --end-call-btn-bg: #d13030;
+            --end-call-btn-hover-bg: #f14242;
+            --scrollbar-thumb: #555555;
+            --scrollbar-track: #333333;
+            --scrollbar-hover: #666666;
+            --dropdown-bg: #323232;
+            --dropdown-hover-bg: #404040;
+            --dropdown-text: #f0f0f0;
+            --dropdown-shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Стили для светлой темы */
+        [data-theme="light"] {
+            --primary-bg-color: #f8f9fa;
+            --secondary-bg-color: #ffffff;
+            --card-bg-color: #ffffff;
+            --text-color: #212529;
+            --secondary-text-color: #495057;
+            --link-color: #0b5ed7;
+            --link-hover-color: #0a58ca;
+            --border-color: #dee2e6;
+            --button-bg-color: #0d6efd;
+            --button-hover-bg-color: #0b5ed7;
+            --button-text-color: #ffffff;
+            --input-bg-color: rgba(240, 240, 240, 0.9);
+            --input-border-color: #ced4da;
+            --input-text-color: #212529;
+            --theme-icon-color: #333333;
+            --empty-card-color: #e9ecef;
+            --nav-text-color: #212529;
+            --menu-hover-bg-color: rgba(0, 0, 0, 0.05);
+            --participant-bg-color: #f0f0f0;
+            --avatar-bg-color: #e6e6e6;
+            --avatar-text-color: #212529;
+            --status-icon-color: #198754;
+            --status-icon-muted-color: #dc3545;
+            --user-card-border: #0b5ed7;
+            --user-card-glow: rgba(11, 94, 215, 0.2);
+            --control-btn-bg: #e9ecef;
+            --control-btn-hover-bg: #dee2e6;
+            --control-btn-active-bg: #0d6efd;
+            --end-call-btn-bg: #dc3545;
+            --end-call-btn-hover-bg: #bb2d3b;
+            --scrollbar-thumb: #adb5bd;
+            --scrollbar-track: #e9ecef;
+            --scrollbar-hover: #6c757d;
+            --dropdown-bg: #ffffff;
+            --dropdown-hover-bg: #f8f9fa;
+            --dropdown-text: #212529;
+            --dropdown-shadow: rgba(0, 0, 0, 0.15);
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background: var(--background-color);
+            background: var(--primary-bg-color);
             color: var(--text-color);
             min-height: 100vh;
             position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Conference container styles */
         .conference-container {
             min-height: 100vh;
             width: 100%;
-            background: var(--background-color);
+            background: var(--primary-bg-color);
             position: relative;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background-color 0.3s ease;
         }
 
         /* Conference content */
@@ -63,7 +141,7 @@
             width: 100%;
             max-width: 1200px;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: var(--card-bg-color);
             border-radius: 15px;
             position: relative;
             display: flex;
@@ -71,14 +149,14 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .main-participant .participant-card:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+            border-color: var(--link-color);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
         }
 
         /* Other participants styles */
@@ -91,7 +169,7 @@
             max-width: 1200px;
             margin: 0 auto;
             scrollbar-width: thin;
-            scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.1);
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
         }
 
         .other-participants::-webkit-scrollbar {
@@ -99,19 +177,19 @@
         }
 
         .other-participants::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--scrollbar-track);
             border-radius: 3px;
         }
 
         .other-participants::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
+            background: var(--scrollbar-thumb);
             border-radius: 3px;
         }
 
         .other-participants .participant-card {
             min-width: 200px;
             height: 150px;
-            background: rgba(0, 0, 0, 0.4);
+            background: var(--card-bg-color);
             border-radius: 15px;
             flex-shrink: 0;
             display: flex;
@@ -120,14 +198,15 @@
             justify-content: center;
             position: relative;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
         .other-participants .participant-card:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            transform: translateY(-2px);
+            border-color: var(--link-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         /* Avatar styles */
@@ -136,6 +215,7 @@
             height: 80px;
             position: relative;
             margin-bottom: 10px;
+            transition: transform 0.3s ease;
         }
 
         .main-participant .participant-avatar {
@@ -147,26 +227,28 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: rgba(139, 92, 246, 0.1);
-            border: 3px solid rgba(139, 92, 246, 0.3);
+            background: var(--avatar-bg-color);
+            border: 3px solid var(--border-color);
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .avatar-circle:hover {
-            border-color: rgba(139, 92, 246, 0.5);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+            border-color: var(--link-color);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
         }
 
         .participant-initials {
-            color: var(--text-color);
+            color: var(--avatar-text-color);
             font-size: 2rem;
             font-weight: bold;
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .participant-img {
@@ -184,7 +266,7 @@
         .participant-name {
             color: var(--text-color);
             font-size: 1rem;
-            text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
             margin-top: 8px;
         }
 
@@ -193,31 +275,61 @@
             margin-top: 12px;
         }
 
+        /* Participant status styles */
         .participant-status {
             position: absolute;
             bottom: 10px;
             right: 10px;
             display: flex;
             gap: 8px;
-            background: rgba(0, 0, 0, 0.4);
+            background: var(--secondary-bg-color);
             padding: 5px 10px;
             border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-
-        .status-icon {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
         }
 
+        .status-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--status-icon-color);
+            transition: all 0.3s ease, transform 0.2s ease;
+            border-radius: 50%;
+            background: rgba(92, 255, 106, 0.1);
+            padding: 5px;
+        }
+
         .status-icon.muted {
-            color: #EC4899;
+            color: var(--status-icon-muted-color);
+            background: rgba(255, 92, 92, 0.1);
+        }
+
+        .status-icon:hover {
+            transform: scale(1.15);
+        }
+
+        .main-participant .status-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 1.1rem;
+        }
+
+        .main-participant .participant-status {
+            padding: 6px 12px;
+            border-radius: 18px;
+        }
+
+        [data-theme="light"] .status-icon {
+            background: rgba(25, 135, 84, 0.1);
+        }
+
+        [data-theme="light"] .status-icon.muted {
+            background: rgba(220, 53, 69, 0.1);
         }
 
         /* Controls panel styles */
@@ -227,8 +339,7 @@
             left: 50%;
             transform: translateX(-50%);
             height: 70px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: var(--secondary-bg-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -237,8 +348,8 @@
             border-radius: 35px;
             width: 1200px;
             max-width: calc(100% - 40px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
         }
 
         .controls-left,
@@ -251,123 +362,119 @@
 
         /* Control buttons styles */
         .control-btn {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--control-btn-bg);
+            border: 1px solid var(--border-color);
             color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
+            margin: 0 5px;
         }
 
         .control-btn:hover {
-            background: rgba(139, 92, 246, 0.2);
+            background: var(--control-btn-hover-bg);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .control-btn.active {
-            background: var(--accent-color);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+            background: var(--control-btn-active-bg);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
         }
 
         .control-btn.muted {
-            background: rgba(236, 72, 153, 0.3);
+            background: var(--control-btn-bg);
+            color: var(--status-icon-muted-color);
         }
 
         /* Text buttons */
         .controls-center .control-btn {
-            width: auto;
             border-radius: 25px;
-            padding: 0 20px;
-            gap: 10px;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+            padding: 0 15px;
+            width: auto;
+            min-width: 120px;
+            height: 45px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .controls-center .control-btn:hover {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         }
 
         .controls-center .control-btn span {
-            display: inline-block;
-            margin-left: 5px;
-            font-size: 0.9rem;
+            margin-left: 8px;
+            font-size: 0.95rem;
         }
 
         /* End call button */
         .end-call-btn {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: none;
-            background: linear-gradient(135deg, #EC4899 0%, #EF4444 100%);
-            color: var(--text-color);
+            background: var(--end-call-btn-bg);
+            border: 1px solid var(--end-call-btn-bg);
+            color: var(--button-text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            margin: 0 5px;
         }
 
         .end-call-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+            background: var(--end-call-btn-hover-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
         }
 
         /* Empty participant card */
         .empty-participant {
-            background: rgba(0, 0, 0, 0.2);
-            border: 2px dashed rgba(139, 92, 246, 0.2);
+            background: var(--empty-card-color);
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
         }
 
         .empty-participant:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            background: rgba(0, 0, 0, 0.3);
+            border-color: var(--link-color);
+            background: var(--participant-bg-color);
+            transform: translateY(-3px);
         }
 
         .empty-participant i {
-            color: rgba(139, 92, 246, 0.3);
-            font-size: 2rem;
+            color: var(--secondary-text-color);
+            font-size: 1.8rem;
             transition: all 0.3s ease;
         }
 
         .empty-participant:hover i {
-            color: rgba(139, 92, 246, 0.5);
+            color: var(--link-color);
             transform: scale(1.1);
-        }
-
-        /* Background decoration */
-        .conference-container::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("img/main.png") no-repeat center center;
-            background-size: cover;
-            opacity: 0.1;
-            z-index: 0;
-            filter: blur(8px);
         }
 
         /* User card highlight */
         .user-card {
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-            animation: cardPulse 3s infinite;
+            border: 2px solid var(--user-card-border);
+            box-shadow: 0 0 25px var(--user-card-glow);
         }
 
-        @keyframes cardPulse {
-            0% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
-            50% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.3); }
-            100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+        .user-card:hover {
+            box-shadow: 0 0 30px var(--user-card-glow);
         }
 
         /* Participant card styles */
@@ -386,7 +493,8 @@
         }
 
         .participant-card .status-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Add animation for switching */
@@ -407,12 +515,303 @@
         .switching-in {
             animation: switchIn 0.3s ease forwards;
         }
+
+        /* Theme switcher styles */
+        .theme-switcher {
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+        }
+        
+        .theme-button {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--nav-text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0.7rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-button:hover {
+            background: var(--menu-hover-bg-color);
+            border-color: var(--link-color);
+        }
+        
+        .theme-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--theme-icon-color);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        /* Language selector styles */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .language-button {
+            background: transparent;
+            border: none;
+            color: var(--nav-text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .language-button span {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .language-button img {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dropdown-bg);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            display: none;
+            flex-direction: column;
+            width: 180px;
+            box-shadow: 0 4px 12px var(--dropdown-shadow);
+            z-index: 1000;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: var(--dropdown-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .language-option img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .language-button:hover {
+            color: var(--link-color);
+            background: var(--menu-hover-bg-color);
+        }
+
+        .language-option:hover {
+            background: var(--dropdown-hover-bg);
+            color: var(--link-color);
+        }
+
+        .language-dropdown.active {
+            display: flex;
+        }
+
+        /* Navigation styles */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            position: relative;
+            z-index: 100;
+            background: var(--secondary-bg-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--nav-text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--link-color);
+            background: var(--menu-hover-bg-color);
+        }
+
+        .nav-link i {
+            margin-right: 5px;
+        }
+
+        /* Улучшенные стили для текущего пользователя */
+        .user-card .avatar-circle {
+            border-color: var(--user-card-border);
+            box-shadow: 0 0 20px var(--user-card-glow);
+        }
+
+        .user-card .avatar-circle:hover {
+            box-shadow: 0 0 30px var(--user-card-glow);
+            transform: scale(1.08);
+        }
+
+        .user-card .participant-name {
+            color: var(--link-color);
+            font-weight: 600;
+        }
+
+        /* Эффект при наведении для карточек участников */
+        .participant-card:hover .participant-avatar {
+            transform: translateY(-5px);
+        }
+
+        /* Стили для анимированного перехода между страницами */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: visibility 0s 0.7s;
+            overflow: hidden;
+        }
+
+        .page-transition-bg {
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-bg-color);
+            transition: transform 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .page-transition-dragon {
+            position: absolute;
+            top: 50%;
+            right: -300px;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 150px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1) 0.2s;
+            z-index: 10000;
+        }
+
+        [data-theme="dark"] .page-transition-dragon {
+            background-image: url('img/white-dragon.png');
+        }
+
+        [data-theme="light"] .page-transition-dragon {
+            background-image: url('img/black-dragon.png');
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+            transition: visibility 0s;
+        }
+
+        .page-transition.active .page-transition-bg {
+            transform: translateX(-100%);
+        }
+
+        .page-transition.active .page-transition-dragon {
+            transform: translate(-110vw, -50%);
+        }
     </style>
 </head>
 <body>
+    <!-- Добавляем элемент для анимации перехода -->
+    <div class="page-transition" id="pageTransition">
+        <div class="page-transition-bg"></div>
+        <div class="page-transition-dragon"></div>
+    </div>
+
     <div class="conference-container">
-        <!-- Обновленная навигация (из предыдущих изменений) -->
-        <!-- ... -->
+        <!-- Navigation -->
+        <nav class="navigation">
+            <a href="index.html" class="logo">TESTNAME</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="#" class="nav-link">О нас</a>
+                <a href="#" class="nav-link">Поддержка</a>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button class="theme-button" id="themeToggle">
+                        <i class="fas fa-moon theme-icon" id="themeIcon"></i>
+                    </button>
+                </div>
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <button class="language-button">
+                        <span>Язык</span>
+                        <img src="img/earth.png" alt="Language">
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option" data-lang="ru">
+                            <img src="img/ru.png" alt="Русский">
+                            <span>Русский</span>
+                        </a>
+                        <a href="#" class="language-option" data-lang="en">
+                            <img src="img/en.png" alt="English">
+                            <span>English</span>
+                        </a>
+                        <a href="#" class="language-option" data-lang="de">
+                            <img src="img/de.png" alt="Deutsch">
+                            <span>Deutsch</span>
+                        </a>
+                        <a href="#" class="language-option" data-lang="fr">
+                            <img src="img/fr.png" alt="Français">
+                            <span>Français</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
         <!-- Основной контент конференции -->
         <div class="conference-content">
@@ -562,9 +961,43 @@
         </div>
     </div>
 
+    <script src="translations.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             try {
+                // Theme switcher functionality
+                const themeToggle = document.getElementById('themeToggle');
+                const themeIcon = document.getElementById('themeIcon');
+                
+                // Check for saved theme preference or default to dark theme
+                const currentTheme = localStorage.getItem('theme') || 'dark';
+                
+                // Apply the theme
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                
+                // Update icon based on current theme
+                if (currentTheme === 'light') {
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                }
+                
+                // Toggle theme when button is clicked
+                themeToggle.addEventListener('click', function() {
+                    let theme = 'dark';
+                    
+                    if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        themeIcon.classList.replace('fa-moon', 'fa-sun');
+                        theme = 'light';
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        themeIcon.classList.replace('fa-sun', 'fa-moon');
+                        theme = 'dark';
+                    }
+                    
+                    // Save theme preference
+                    localStorage.setItem('theme', theme);
+                });
+
                 // Load user data from localStorage
                 const userName = localStorage.getItem('userName');
                 const avatar = localStorage.getItem('avatar');
@@ -602,38 +1035,129 @@
                 // Находим элементы управления
                 const micBtn = document.getElementById('micBtn');
                 const camBtn = document.getElementById('camBtn');
-                const audioStatus = userCard.querySelector('.status-icon:first-child');
-                const videoStatus = userCard.querySelector('.status-icon:last-child');
+                const userAudioStatus = document.getElementById('userAudioStatus');
+                const userVideoStatus = document.getElementById('userVideoStatus');
 
                 // Устанавливаем начальное состояние
                 if (isAudioMuted) {
                     micBtn.classList.add('muted');
-                    audioStatus.classList.add('muted');
+                    userAudioStatus.classList.add('muted');
                     micBtn.querySelector('i').classList.replace('fa-microphone', 'fa-microphone-slash');
-                    audioStatus.querySelector('i').classList.replace('fa-microphone', 'fa-microphone-slash');
+                    userAudioStatus.querySelector('i').classList.replace('fa-microphone', 'fa-microphone-slash');
                 }
 
                 if (isVideoMuted) {
                     camBtn.classList.add('muted');
-                    videoStatus.classList.add('muted');
+                    userVideoStatus.classList.add('muted');
                     camBtn.querySelector('i').classList.replace('fa-video', 'fa-video-slash');
-                    videoStatus.querySelector('i').classList.replace('fa-video', 'fa-video-slash');
+                    userVideoStatus.querySelector('i').classList.replace('fa-video', 'fa-video-slash');
                 }
 
-                // Функция обновления иконок микрофона
-                function updateMicIcons(isMuted) {
-                    // Обновляем все карточки с классом user-card
-                    document.querySelectorAll('.participant-card.user-card').forEach(card => {
-                        const statusIcon = card.querySelector('.status-icon:first-child');
-                        const icon = statusIcon.querySelector('i');
+                // Загружаем сохраненный язык
+                const currentLang = localStorage.getItem('selectedLanguage') || 'ru';
+                window.currentLang = currentLang; // Сохраняем глобально для использования в других функциях
+                
+                // Language selector functionality
+                const languageButton = document.querySelector('.language-button');
+                const languageDropdown = document.querySelector('.language-dropdown');
+                const languageOptions = document.querySelectorAll('.language-option');
+
+                // Function to update page content based on selected language
+                function updatePageContent(lang) {
+                    // Update navigation links
+                    document.querySelector('.nav-links').children[0].textContent = translations[lang].nav.home;
+                    document.querySelector('.nav-links').children[1].textContent = translations[lang].nav.about;
+                    document.querySelector('.nav-links').children[2].textContent = translations[lang].nav.support;
+                    
+                    // Update language button text
+                    languageButton.querySelector('span').textContent = translations[lang].nav.language;
+                    
+                    // Update interface texts for conference controls
+                    updateInterfaceTexts(lang);
+                }
+                
+                // Load saved language and update the language button
+                const savedLangImg = localStorage.getItem('selectedLanguageImg');
+                if (currentLang && savedLangImg) {
+                    languageButton.querySelector('span').textContent = translations[currentLang].nav.language;
+                    languageButton.querySelector('img').src = savedLangImg;
+                }
+                
+                // Open/close dropdown on button click
+                languageButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    languageDropdown.classList.toggle('active');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!languageDropdown.contains(e.target) && !languageButton.contains(e.target)) {
+                        languageDropdown.classList.remove('active');
+                    }
+                });
+
+                // Handle language selection
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const lang = this.getAttribute('data-lang');
+                        const langText = this.textContent.trim();
+                        const langImg = this.querySelector('img').src;
                         
-                        statusIcon.classList.toggle('muted', isMuted);
+                        // Save selected language
+                        localStorage.setItem('selectedLanguage', lang);
+                        localStorage.setItem('selectedLanguageText', langText);
+                        localStorage.setItem('selectedLanguageImg', langImg);
+                        window.currentLang = lang;
+                        
+                        // Update page content
+                        updatePageContent(lang);
+                        
+                        // Update button icon
+                        languageButton.querySelector('img').src = langImg;
+                        
+                        // Close dropdown
+                        languageDropdown.classList.remove('active');
+                    });
+                });
+                
+                // Применяем текущий язык для всей страницы
+                updatePageContent(currentLang);
+                
+                // Функция обновления текстов интерфейса в соответствии с выбранным языком
+                function updateInterfaceTexts(lang) {
+                    // Обновляем тексты в нижней панели управления
+                    if (translations[lang] && translations[lang].conference) {
+                        // Обновляем заголовки кнопок
+                        document.querySelector('.settings-btn').title = translations[lang].conference.settings;
+                        document.querySelector('.mic-btn').title = translations[lang].conference.microphone;
+                        document.querySelector('.cam-btn').title = translations[lang].conference.camera;
+                        document.querySelector('.share-screen-btn').title = translations[lang].conference.shareScreen;
+                        document.querySelector('.participants-btn').title = translations[lang].conference.participants;
+                        document.querySelector('.raise-hand-btn').title = translations[lang].conference.raiseHand;
+                        document.querySelector('.more-btn').title = translations[lang].conference.more;
+                        document.querySelector('.end-call-btn').title = translations[lang].conference.endCall;
+                        
+                        // Обновляем текст на кнопках
+                        document.querySelector('.share-screen-btn span').textContent = translations[lang].conference.shareScreenText;
+                        document.querySelector('.participants-btn span').textContent = translations[lang].conference.participantsText;
+                    }
+                }
+
+                // Функция обновления иконок микрофона пользователя
+                function updateMicIcons(isMuted) {
+                    // Находим элемент только по ID, а не по классу
+                    const userAudioStatus = document.getElementById('userAudioStatus');
+                    if (userAudioStatus) {
+                        const icon = userAudioStatus.querySelector('i');
+                        
+                        userAudioStatus.classList.toggle('muted', isMuted);
                         if (isMuted) {
                             icon.classList.replace('fa-microphone', 'fa-microphone-slash');
                         } else {
                             icon.classList.replace('fa-microphone-slash', 'fa-microphone');
                         }
-                    });
+                    }
 
                     // Обновляем кнопку управления
                     const btnIcon = micBtn.querySelector('i');
@@ -645,20 +1169,20 @@
                     }
                 }
 
-                // Функция обновления иконок камеры
+                // Функция обновления иконок камеры пользователя
                 function updateCamIcons(isMuted) {
-                    // Обновляем все карточки с классом user-card
-                    document.querySelectorAll('.participant-card.user-card').forEach(card => {
-                        const statusIcon = card.querySelector('.status-icon:last-child');
-                        const icon = statusIcon.querySelector('i');
+                    // Находим элемент только по ID, а не по классу
+                    const userVideoStatus = document.getElementById('userVideoStatus');
+                    if (userVideoStatus) {
+                        const icon = userVideoStatus.querySelector('i');
                         
-                        statusIcon.classList.toggle('muted', isMuted);
+                        userVideoStatus.classList.toggle('muted', isMuted);
                         if (isMuted) {
                             icon.classList.replace('fa-video', 'fa-video-slash');
                         } else {
                             icon.classList.replace('fa-video-slash', 'fa-video');
                         }
-                    });
+                    }
 
                     // Обновляем кнопку управления
                     const btnIcon = camBtn.querySelector('i');
@@ -670,84 +1194,35 @@
                     }
                 }
 
-                // Обработчик для кнопки микрофона
-                micBtn.addEventListener('click', function() {
-                    const isMuted = !this.classList.contains('muted');
-                    updateMicIcons(isMuted);
-                    localStorage.setItem('audioMuted', isMuted);
-                });
-
-                // Обработчик для кнопки камеры
-                camBtn.addEventListener('click', function() {
-                    const isMuted = !this.classList.contains('muted');
-                    updateCamIcons(isMuted);
-                    localStorage.setItem('videoMuted', isMuted);
-                });
-
-                // Обработчик для иконок статуса в карточке пользователя
-                audioStatus.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isMuted = !this.classList.contains('muted');
-                    updateMicIcons(isMuted);
-                    localStorage.setItem('audioMuted', isMuted);
-                });
-
-                videoStatus.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isMuted = !this.classList.contains('muted');
-                    updateCamIcons(isMuted);
-                    localStorage.setItem('videoMuted', isMuted);
-                });
-
-                // Отслеживаем текущего главного участника
-                let currentMainParticipant = document.querySelector('.main-participant .participant-card');
-
-                // Функция для переключения участников
-                function switchParticipants(clickedCard) {
-                    if (clickedCard.closest('.main-participant')) return;
+                // Функция для повторного добавления обработчиков к иконкам статуса
+                function rebindStatusIconListeners() {
+                    // Удаляем все старые обработчики со всего документа
+                    document.removeEventListener('click', handleStatusIconClick);
                     
-                    const mainParticipantContainer = document.querySelector('.main-participant');
-                    const mainCard = mainParticipantContainer.querySelector('.participant-card');
-                    const otherParticipants = document.querySelector('.other-participants');
-                    
-                    // Создаем временные копии содержимого карточек
-                    const mainCardHTML = mainCard.innerHTML;
-                    const clickedCardHTML = clickedCard.innerHTML;
-                    
-                    // Меняем содержимое карточек
-                    mainCard.innerHTML = clickedCardHTML;
-                    clickedCard.innerHTML = mainCardHTML;
-                    
-                    // Обновляем классы и стили
-                    if (clickedCard.classList.contains('user-card')) {
-                        mainCard.classList.add('user-card');
-                        clickedCard.classList.remove('user-card');
-                    } else if (mainCard.classList.contains('user-card')) {
-                        clickedCard.classList.add('user-card');
-                        mainCard.classList.remove('user-card');
-                    }
+                    // Добавляем единый делегированный обработчик на весь документ
+                    document.addEventListener('click', handleStatusIconClick);
                 }
-
-                // Добавляем обработчики для всех карточек участников
-                document.querySelectorAll('.participant-card').forEach(card => {
-                    if (!card.classList.contains('empty-participant')) {
-                        card.addEventListener('click', function(e) {
-                            // Проверяем, что клик не был по иконкам статуса
-                            if (!e.target.closest('.status-icon')) {
-                                switchParticipants(this);
-                            }
-                        });
-                    }
-                });
-
-                // Функция для переключения состояния аудио/видео других участников
-                function toggleMediaState(icon, isAudio) {
-                    const participantCard = icon.closest('.participant-card');
-                    // Проверяем, не является ли это карточкой текущего пользователя
-                    if (participantCard.classList.contains('user-card')) {
-                        return; // Игнорируем клики по иконкам текущего пользователя
+                
+                // Обработчик кликов по иконкам статуса через делегирование событий
+                function handleStatusIconClick(e) {
+                    // Находим ближайшую иконку статуса от места клика
+                    const statusIcon = e.target.closest('.status-icon');
+                    if (!statusIcon) return; // Клик не по иконке статуса
+                    
+                    // Предотвращаем всплытие события, чтобы не сработало переключение карточек
+                    e.stopPropagation();
+                    
+                    // Если это иконка пользователя - просто игнорируем
+                    if (statusIcon.id === 'userAudioStatus' || statusIcon.id === 'userVideoStatus') {
+                        return;
                     }
                     
+                    // Определяем тип иконки (аудио или видео)
+                    const isAudio = statusIcon.querySelector('i').classList.contains('fa-microphone') || 
+                                   statusIcon.querySelector('i').classList.contains('fa-microphone-slash');
+                    
+                    // Переключаем состояние
+                    const icon = statusIcon;
                     icon.classList.toggle('muted');
                     const i = icon.querySelector('i');
                     
@@ -766,15 +1241,84 @@
                     }
                 }
 
-                // Добавляем обработчики для иконок статуса всех участников
-                document.querySelectorAll('.participant-card:not(.empty-participant) .status-icon').forEach(icon => {
-                    const isAudio = icon.querySelector('i').classList.contains('fa-microphone') || 
-                                  icon.querySelector('i').classList.contains('fa-microphone-slash');
+                // Единый обработчик для переключения участников
+                function handleCardClick(e) {
+                    // Если клик по иконке статуса - игнорируем
+                    if (e.target.closest('.status-icon')) return;
                     
-                    icon.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        toggleMediaState(this, isAudio);
-                    });
+                    // Находим ближайшую карточку от места клика
+                    const card = e.target.closest('.participant-card');
+                    if (!card || card.classList.contains('empty-participant')) return;
+                    
+                    // Переключаем участников
+                    switchParticipants(card);
+                }
+
+                // Функция для переключения участников
+                function switchParticipants(clickedCard) {
+                    if (clickedCard.closest('.main-participant')) return;
+                    
+                    const mainParticipantContainer = document.querySelector('.main-participant');
+                    const mainCard = mainParticipantContainer.querySelector('.participant-card');
+                    
+                    // Проверяем, является ли какая-то из карточек пользовательской
+                    const isMainUserCard = mainCard.querySelector('#userAudioStatus') !== null;
+                    const isClickedUserCard = clickedCard.querySelector('#userAudioStatus') !== null;
+                    
+                    // Создаем временные копии содержимого карточек
+                    const mainCardClone = mainCard.cloneNode(true);
+                    const clickedCardClone = clickedCard.cloneNode(true);
+                    
+                    // Переносим ID элементов, чтобы не потерять связь с управлением
+                    if (isMainUserCard) {
+                        // Находим элементы и сохраняем ID
+                        clickedCardClone.querySelector('.status-icon:first-child').id = 'userAudioStatus';
+                        clickedCardClone.querySelector('.status-icon:last-child').id = 'userVideoStatus';
+                        clickedCardClone.id = 'currentUserCard';
+                        clickedCardClone.classList.add('user-card');
+                        mainCard.classList.remove('user-card');
+                    } else if (isClickedUserCard) {
+                        // Находим элементы и сохраняем ID
+                        mainCardClone.querySelector('.status-icon:first-child').id = 'userAudioStatus';
+                        mainCardClone.querySelector('.status-icon:last-child').id = 'userVideoStatus';
+                        mainCardClone.id = 'currentUserCard';
+                        mainCardClone.classList.add('user-card');
+                        clickedCard.classList.remove('user-card');
+                    }
+                    
+                    // Заменяем карточки
+                    mainCard.parentNode.replaceChild(clickedCardClone, mainCard);
+                    clickedCard.parentNode.replaceChild(mainCardClone, clickedCard);
+                }
+
+                // Удаляем старые обработчики событий
+                document.removeEventListener('click', handleStatusIconClick);
+                document.querySelectorAll('.participant-card').forEach(card => {
+                    card.removeEventListener('click', handleCardClick);
+                });
+                
+                // Добавляем обработчик на все карточки участников
+                document.querySelectorAll('.participant-card').forEach(card => {
+                    if (!card.classList.contains('empty-participant')) {
+                        card.addEventListener('click', handleCardClick);
+                    }
+                });
+                
+                // Инициализируем обработчик для иконок статуса
+                rebindStatusIconListeners();
+
+                // Обработчик для кнопки микрофона - всегда управляем своим микрофоном
+                micBtn.addEventListener('click', function() {
+                    const isMuted = !this.classList.contains('muted');
+                    updateMicIcons(isMuted);
+                    localStorage.setItem('audioMuted', isMuted);
+                });
+
+                // Обработчик для кнопки камеры - всегда управляем своей камерой
+                camBtn.addEventListener('click', function() {
+                    const isMuted = !this.classList.contains('muted');
+                    updateCamIcons(isMuted);
+                    localStorage.setItem('videoMuted', isMuted);
                 });
 
                 // Обработчик для кнопки "Поднять руку"
@@ -784,9 +1328,9 @@
                         this.classList.toggle('active');
                         const isActive = this.classList.contains('active');
                         if (isActive) {
-                            alert('Вы подняли руку');
+                            alert(translations[window.currentLang].conference.handRaised);
                         } else {
-                            alert('Вы опустили руку');
+                            alert(translations[window.currentLang].conference.handLowered);
                         }
                     });
                 }
@@ -798,9 +1342,9 @@
                         this.classList.toggle('active');
                         const isActive = this.classList.contains('active');
                         if (isActive) {
-                            alert('Демонстрация экрана включена');
+                            alert(translations[window.currentLang].conference.screenShareOn);
                         } else {
-                            alert('Демонстрация экрана выключена');
+                            alert(translations[window.currentLang].conference.screenShareOff);
                         }
                     });
                 }
@@ -809,9 +1353,72 @@
                 const participantsBtn = document.querySelector('.participants-btn');
                 if (participantsBtn) {
                     participantsBtn.addEventListener('click', function() {
-                        alert('Участники конференции: 5\n\nПреподаватель Сидоров\nВы\nАнна Иванова\nМария Козлова\nИван Петров');
+                        alert(translations[window.currentLang].conference.participantsList + ': 5\n\n' + 
+                              translations[window.currentLang].conference.teacher + ' Сидоров\n' + 
+                              translations[window.currentLang].conference.you + '\n' + 
+                              'Анна Иванова\n' + 
+                              'Мария Козлова\n' + 
+                              'Иван Петров');
                     });
                 }
+
+                // Функция для создания анимации перехода между страницами
+                function setupPageTransitions() {
+                    // Создаем глобальную функцию для перехода между страницами
+                    window.navigateTo = function(url) {
+                        const pageTransition = document.getElementById('pageTransition');
+                        pageTransition.classList.add('active');
+                        
+                        setTimeout(() => {
+                            window.location.href = url;
+                        }, 700);
+                    };
+                    
+                    // Применяем ко всем ссылкам, кроме управления конференцией
+                    document.querySelectorAll('a').forEach(link => {
+                        // Исключаем ссылки, которые не ведут на другие страницы или являются управлением
+                        if (link.getAttribute('href') && 
+                            link.getAttribute('href') !== '#' && 
+                            !link.getAttribute('href').startsWith('javascript:') &&
+                            !link.classList.contains('language-option') &&
+                            !link.closest('.controls-center') &&
+                            !link.closest('.controls-right') &&
+                            !link.closest('.controls-left')) {
+                            
+                            link.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                window.navigateTo(this.getAttribute('href'));
+                            });
+                        }
+                    });
+                    
+                    // Обработка кнопки завершения звонка
+                    document.querySelector('.end-call-btn').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Анимируем переход
+                        const pageTransition = document.getElementById('pageTransition');
+                        pageTransition.classList.add('active');
+                        
+                        // Переход на страницу профиля
+                        setTimeout(() => {
+                            window.location.href = 'profile.html';
+                        }, 700);
+                    });
+                    
+                    // Проверяем, загружалась ли страница впервые или через переход
+                    if (performance.navigation.type === 0) {
+                        // Скрываем анимацию для первой загрузки
+                        const pageTransition = document.getElementById('pageTransition');
+                        pageTransition.style.display = 'none';
+                        setTimeout(() => {
+                            pageTransition.style.display = '';
+                        }, 100);
+                    }
+                }
+                
+                // Запускаем настройку переходов
+                setupPageTransitions();
 
             } catch (e) {
                 console.error('Ошибка при инициализации страницы:', e);
