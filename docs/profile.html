@@ -492,11 +492,11 @@
         }
 
         [data-theme="dark"] .page-transition-dragon {
-            background-image: url('img/white-dragon.png');
+            background-image: url('img/svg/white-dragon.svg');
         }
 
         [data-theme="light"] .page-transition-dragon {
-            background-image: url('img/black-dragon.png');
+            background-image: url('img/svg/black-dragon.svg');
         }
 
         .page-transition.active {
@@ -876,27 +876,6 @@
                 }
             });
             
-            // Переход на страницу конференции
-            connectBtn.addEventListener('click', function() {
-                try {
-                    const name = nameInput.value.trim();
-                    if (name) {
-                        localStorage.setItem('userName', name);
-                        sessionStorage.setItem('userName', name);
-                    }
-                    
-                    this.textContent = translations[window.currentLang].profile.connecting;
-                    this.disabled = true;
-                    
-                    setTimeout(() => {
-                        window.location.href = 'conference.html';
-                    }, 800);
-                } catch (e) {
-                    console.error('Error during transition:', e);
-                    window.location.href = 'conference.html';
-                }
-            });
-            
             // Проверка работоспособности localStorage
             try {
                 const testKey = '_test_storage';
@@ -935,19 +914,31 @@
                     }
                 });
                 
-                // Обработка кнопки конференции
-                document.getElementById('joinConferenceBtn').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Анимируем переход
-                    const pageTransition = document.getElementById('pageTransition');
-                    pageTransition.classList.add('active');
-                    
-                    // Переход на страницу конференции
-                    setTimeout(() => {
-                        window.location.href = 'conference.html';
-                    }, 700);
-                });
+                // Обработка кнопки подключения
+                if (connectBtn) {
+                    connectBtn.addEventListener('click', function(e) {
+                        // Сохраняем имя пользователя
+                        const nameInput = document.getElementById('nameInput');
+                        const name = nameInput.value.trim();
+                        if (name) {
+                            localStorage.setItem('userName', name);
+                            sessionStorage.setItem('userName', name);
+                        }
+                        
+                        // Изменяем текст кнопки
+                        this.textContent = translations[window.currentLang].profile.connecting;
+                        this.disabled = true;
+                        
+                        // Анимируем переход
+                        const pageTransition = document.getElementById('pageTransition');
+                        pageTransition.classList.add('active');
+                        
+                        // Переход на страницу конференции
+                        setTimeout(() => {
+                            window.location.href = 'conference.html';
+                        }, 700);
+                    });
+                }
                 
                 // Проверяем, загружалась ли страница впервые или через переход
                 if (performance.navigation.type === 0) {
