@@ -26,7 +26,6 @@ body {
 .main-container {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -81,7 +80,6 @@ body {
 .login-container {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -625,7 +623,6 @@ h1 {
 .profile-container {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
     background-size: cover;
     background-position: center;
     position: relative;

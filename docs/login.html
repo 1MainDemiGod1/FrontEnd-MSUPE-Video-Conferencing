@@ -10,19 +10,73 @@
     <link rel="apple-touch-icon" href="favicon.svg">
     <style>
         :root {
-            --accent-color: #8B5CF6;
-            --text-color: #FFFFFF;
-            --background-color: #1A1A1A;
+            /* Dark theme (default) */
+            --primary-bg-color: #1a1a1a;
+            --secondary-bg-color: #2a2a2a;
+            --card-bg-color: #323232;
+            --text-color: #ffffff;
+            --secondary-text-color: #ebebeb;
+            --link-color: #4dabf5;
+            --link-hover-color: #75bdff;
+            --border-color: #444444;
+            --button-bg-color: #2a74c8;
+            --button-hover-bg-color: #3986da;
+            --button-text-color: #ffffff;
+            --input-bg-color: rgba(70, 70, 70, 0.7);
+            --input-border-color: #555555;
+            --input-text-color: #ffffff;
+            --input-placeholder: #888888;
+            --theme-icon-color: #FFFFFF;
+            --empty-card-color: #404040;
+            --nav-text-color: #f0f0f0;
+            --menu-hover-bg-color: rgba(255, 255, 255, 0.1);
+            --nav-bg-color: #2a2a2a;
+            --dropdown-bg: #323232;
+            --dropdown-hover-bg: #404040;
+            --dropdown-text: #f0f0f0;
+            --dropdown-shadow: rgba(0, 0, 0, 0.5);
+            --accent-color: #4dabf5;
+            --bg-image: url('img/enterblack.png');
+        }
+        
+        [data-theme="light"] {
+            --primary-bg-color: #f8f9fa;
+            --secondary-bg-color: #ffffff;
+            --card-bg-color: #ffffff;
+            --text-color: #212529;
+            --secondary-text-color: #495057;
+            --link-color: #0b5ed7;
+            --link-hover-color: #0a58ca;
+            --border-color: #dee2e6;
+            --button-bg-color: #0d6efd;
+            --button-hover-bg-color: #0b5ed7;
+            --button-text-color: #ffffff;
+            --input-bg-color: rgba(240, 240, 240, 0.9);
+            --input-border-color: #ced4da;
+            --input-text-color: #212529;
+            --input-placeholder: #6c757d;
+            --theme-icon-color: #333333;
+            --empty-card-color: #e9ecef;
+            --nav-text-color: #212529;
+            --menu-hover-bg-color: rgba(0, 0, 0, 0.05);
+            --nav-bg-color: #ffffff;
+            --dropdown-bg: #ffffff;
+            --dropdown-hover-bg: #f8f9fa;
+            --dropdown-text: #212529;
+            --dropdown-shadow: rgba(0, 0, 0, 0.15);
+            --accent-color: #0b5ed7;
+            --bg-image: url('img/enterwhite.png');
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background: var(--background-color);
+            background: var(--primary-bg-color);
             color: var(--text-color);
             min-height: 100vh;
             position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Navigation styles */
@@ -30,44 +84,50 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 4rem;
+            padding: 1.5rem 4rem;
             position: relative;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            background: var(--secondary-bg-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .logo {
-            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #FFFFFF;
             text-decoration: none;
+            margin-bottom: 0;
             letter-spacing: 1px;
-            transition: opacity 0.3s ease;
+            transition: color 0.3s ease;
         }
 
-        .logo:hover {
-            opacity: 0.8;
+        .logo img {
+            height: 1.9rem;
+            margin-right: 0.5rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 3.5rem;
+            gap: 1.5rem;
             align-items: center;
-            margin: 0 auto;
-            padding: 0 2rem;
         }
 
         .nav-link {
-            color: #FFFFFF;
+            color: var(--nav-text-color);
             text-decoration: none;
-            font-size: 1.3rem;
-            transition: opacity 0.3s ease;
+            font-size: 1.1rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
         }
 
         .nav-link:hover {
-            opacity: 0.8;
+            color: var(--link-color);
+            background: var(--menu-hover-bg-color);
         }
 
         /* Language selector styles */
@@ -75,35 +135,65 @@
             display: flex;
             align-items: center;
             position: relative;
-            width: 180px;
             margin-left: 20px;
         }
 
-        .language-button {
+        /* Theme switcher styles */
+        .theme-switcher {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0.7rem;
-            color: #FFFFFF;
-            background: none;
-            border: none;
+            margin-left: 1.5rem;
+        }
+        
+        .theme-button {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--nav-text-color);
             cursor: pointer;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            padding: 0.7rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-button:hover {
+            background: var(--menu-hover-bg-color);
+            border-color: var(--link-color);
+        }
+        
+        .theme-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--theme-icon-color);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .language-button {
+            background: transparent;
+            border: none;
+            color: var(--nav-text-color);
+            cursor: pointer;
+            font-size: 1.1rem;
             font-weight: 500;
-            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .language-button span {
             display: inline-block;
-            width: 100px;
-            text-align: right;
-            margin-right: 10px;
+            margin-right: 5px;
         }
 
         .language-button img {
-            width: 28px;
-            height: 28px;
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
             transition: transform 0.3s ease;
         }
 
@@ -111,16 +201,14 @@
             position: absolute;
             top: 100%;
             right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: var(--dropdown-bg);
             border-radius: 8px;
             padding: 0.5rem;
             margin-top: 0.5rem;
             display: none;
             flex-direction: column;
-            gap: 0.5rem;
             width: 180px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px var(--dropdown-shadow);
             z-index: 1000;
         }
 
@@ -128,9 +216,9 @@
             display: flex;
             align-items: center;
             padding: 0.8rem 1rem;
-            color: #FFFFFF;
+            color: var(--dropdown-text);
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             border-radius: 4px;
         }
 
@@ -140,21 +228,14 @@
             margin-right: 10px;
         }
 
-        .language-option span {
-            flex: 1;
-        }
-
-        .language-button:hover,
-        .language-option:hover {
-            opacity: 0.8;
+        .language-button:hover {
+            color: var(--link-color);
+            background: var(--menu-hover-bg-color);
         }
 
         .language-option:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .language-button:hover img {
-            transform: rotate(15deg);
+            background: var(--dropdown-hover-bg);
+            color: var(--link-color);
         }
 
         .language-dropdown.active {
@@ -181,7 +262,8 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--text-color);
+            opacity: 0.4;
             font-size: 0.9rem;
             pointer-events: none;
             z-index: 10;
@@ -195,19 +277,29 @@
             width: 100%;
             height: 100%;
             padding: 0 15px 0 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--input-bg-color);
+            border: 1px solid var(--input-border-color);
             border-radius: 8px;
-            color: var(--text-color);
+            color: var(--input-text-color);
             font-size: 1rem;
             line-height: 50px;
             transition: all 0.3s ease;
         }
         
         .form-input:focus {
-            border-color: var(--accent-color);
+            border-color: var(--link-color);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        
+        [data-theme="light"] .form-input {
+            background-color: rgba(240, 240, 240, 0.9);
+            border-color: #adb5bd;
+        }
+        
+        [data-theme="light"] .form-input:focus {
+            border-color: var(--link-color);
+            background-color: #ffffff;
         }
         
         /* Сообщения под контейнером */
@@ -222,12 +314,12 @@
             font-size: 0.85rem;
             padding-left: 10px;
             margin-top: 5px;
-            color: #EC4899;
+            color: var(--status-icon-muted-color);
         }
         
         /* Состояния ошибки */
         .input-group.error .form-input {
-            border-color: #ff3860;
+            border-color: var(--status-icon-muted-color);
         }
         
         .input-group.error .error-message {
@@ -236,37 +328,132 @@
         
         /* Кнопка входа */
         .login-button {
-            margin-top: 10px;
-            padding: 15px;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
-            color: var(--text-color);
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
             border: none;
+            border-radius: 0.375rem;
+            padding: 0.75rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            width: 100%;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
         }
         
         .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+            background-color: var(--button-hover-bg-color);
+        }
+
+        /* Стили для кнопки входа при наведении в зависимости от темы */
+        [data-theme="dark"] .login-button:hover {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+        
+        [data-theme="light"] .login-button:hover {
+            background-color: #000000;
+            color: #FFFFFF;
         }
 
         .login-button:disabled {
-            background: rgba(139, 92, 246, 0.5);
+            opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
+        }
+
+        /* Дополнительные стили для обеспечения контраста в светлой теме */
+        [data-theme="light"] .form-input {
+            color: var(--input-text-color);
+            border-color: #adb5bd;
+        }
+        
+        [data-theme="light"] .form-input:focus {
+            border-color: var(--link-color);
+            color: #000000;
+        }
+        
+        /* Стили для плейсхолдеров в светлой теме */
+        [data-theme="light"] .form-input::placeholder {
+            color: #495057;
+            opacity: 0.8;
+        }
+        
+        [data-theme="light"] .form-input::-webkit-input-placeholder {
+            color: #495057;
+            opacity: 0.8;
+        }
+        
+        [data-theme="light"] .form-input::-moz-placeholder {
+            color: #495057;
+            opacity: 0.8;
+        }
+        
+        [data-theme="light"] .form-input:-ms-input-placeholder {
+            color: #495057;
+            opacity: 0.8;
+        }
+        
+        [data-theme="light"] .form-input:-moz-placeholder {
+            color: #495057;
+            opacity: 0.8;
+        }
+        
+        [data-theme="light"] .input-icon {
+            color: #495057;
+            opacity: 0.7;
+        }
+        
+        [data-theme="light"] .error-message {
+            color: #dc3545;
+        }
+
+        [data-theme="light"] .create-link {
+            color: var(--link-color);
+            font-weight: 500;
+        }
+
+        [data-theme="light"] .create-link:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+
+        [data-theme="light"] h1 {
+            color: #000000;
+            font-weight: 700;
+        }
+
+        [data-theme="light"] .login-form {
+            color: #212529;
+        }
+
+        [data-theme="light"] .language-button {
+            color: #333333;
+        }
+
+        [data-theme="light"] .theme-button {
+            background-color: #f0f0f0;
+            border-color: #d0d0d0;
         }
 
         /* Ссылка для создания аккаунта */
         .create-link {
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            color: var(--link-color);
+            transition: all 0.3s ease;
         }
 
         .create-link:hover {
-            opacity: 0.8;
+            color: var(--link-hover-color);
+        }
+
+        /* Ссылка для восстановления пароля */
+        .forgot-password-link {
+            text-decoration: none;
+            color: var(--link-color);
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password-link:hover {
+            color: var(--link-hover-color);
         }
 
         /* Заголовок формы */
@@ -276,11 +463,185 @@
             margin-bottom: 2rem;
             font-size: 2.5rem;
             font-weight: 700;
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Фоновое изображение */
+        .login-container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+            filter: none;
+            background-blend-mode: normal;
+            mix-blend-mode: normal;
+            -webkit-mask-image: none;
+            mask-image: none;
+        }
+        
+        /* Контейнер для формы */
+        .login-box {
+            background: var(--card-bg-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 450px;
+            margin: 2rem 5rem 2rem auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            align-self: flex-end;
+            position: absolute;
+            right: 300px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1;
+        }
+        
+        .forgot-password {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            display: block;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--link-hover-color);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--nav-bg-color);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--nav-text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Стили для анимированного перехода между страницами */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: visibility 0s 0.7s;
+            overflow: hidden;
+        }
+
+        .page-transition-bg {
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-bg-color);
+            transition: transform 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .page-transition-dragon {
+            position: absolute;
+            top: 50%;
+            right: -300px;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 150px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            transition: transform 0.5s cubic-bezier(0.5, 0, 0.5, 1) 0.2s;
+            z-index: 10000;
+        }
+
+        [data-theme="dark"] .page-transition-dragon {
+            background-image: url('img/svg/white-dragon.svg');
+        }
+
+        [data-theme="light"] .page-transition-dragon {
+            background-image: url('img/svg/black-dragon.svg');
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            visibility: visible;
+            transition: visibility 0s;
+        }
+
+        .page-transition.active .page-transition-bg {
+            transform: translateX(-100%);
+        }
+
+        .page-transition.active .page-transition-dragon {
+            transform: translate(-110vw, -50%);
+        }
+
+        .create-account {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Контейнер для ссылки "Забыли пароль?" */
+        .forgot-password-container {
+            text-align: right;
+            margin-bottom: -4px;
+            margin-top: -32px;
         }
     </style>
 </head>
 <body>
+    <!-- Добавляем элемент для анимации перехода -->
+    <div class="page-transition" id="pageTransition">
+        <div class="page-transition-bg"></div>
+        <div class="page-transition-dragon"></div>
+    </div>
+
     <div class="login-container">
         <!-- Navigation -->
         <nav class="navigation">
@@ -290,6 +651,14 @@
                 <a href="#" class="nav-link">О нас</a>
                 <a href="#" class="nav-link">Поддержка</a>
             </div>
+            <div style="display: flex; align-items: center;">
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button class="theme-button" id="themeToggle">
+                        <i class="fas fa-moon theme-icon" id="themeIcon"></i>
+                    </button>
+                </div>
+                <!-- Language Selector -->
             <div class="language-selector">
                 <button class="language-button">
                     <span>Язык</span>
@@ -312,9 +681,15 @@
                         <img src="img/fr.png" alt="Français">
                         <span>Français</span>
                     </a>
+                    </div>
                 </div>
             </div>
         </nav>
+
+        <!-- Background container for the background image -->
+        <div class="background-container" id="backgroundContainer">
+            <!-- The background image will be added here via JS -->
+        </div>
 
         <!-- Форма входа -->
         <div class="login-box">
@@ -342,20 +717,105 @@
                     </div>
                 </div>
                 
+                <div class="forgot-password-container">
+                    <a href="#" class="forgot-password-link">Забыли пароль?</a>
+                </div>
+                
                 <button type="button" class="login-button" onclick="handleLogin()">Войти</button>
                 <div class="create-account">
                     <a href="register.html" class="create-link">Создать аккаунт</a>
                 </div>
             </form>
         </div>
-
-        <!-- Декоративные элементы -->
-        <div class="decoration-wave"></div>
     </div>
 
     <script src="translations.js"></script>
     <script>
+        // Объявляем функцию handleLogin как глобальную
+        function handleLogin() {
+            const passwordInput = document.getElementById('password');
+            const passwordGroup = document.getElementById('passwordGroup');
+            const loginButton = document.querySelector('.login-button');
+
+            // Проверка пароля
+            if (passwordInput.value.length < 6) {
+                passwordGroup.classList.add('error');
+                return false;
+            }
+
+            // Деактивируем кнопку и меняем текст
+            loginButton.disabled = true;
+            const currentLang = localStorage.getItem('selectedLanguage') || 'ru';
+            loginButton.textContent = translations[currentLang].auth.loginButton + '...';
+
+            // Используем анимацию перехода
+            window.navigateTo('profile.html');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Отложенная загрузка фонового изображения
+            setTimeout(function() {
+                const bgContainer = document.getElementById('backgroundContainer');
+                const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                const bgImage = theme === 'dark' ? 'img/enterblack.png' : 'img/enterwhite.png';
+                
+                bgContainer.style.backgroundImage = `url('${bgImage}')`;
+                bgContainer.style.backgroundRepeat = 'no-repeat';
+                bgContainer.style.backgroundSize = 'cover';
+                bgContainer.style.backgroundPosition = 'center';
+                bgContainer.style.opacity = '1';
+                bgContainer.style.filter = 'none';
+            }, 100);
+            
+            // Theme switcher functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            // Check for saved theme preference or default to dark theme
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            
+            // Apply the theme
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            // Update icon based on current theme
+            if (currentTheme === 'light') {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            // Toggle theme when button is clicked
+            themeToggle.addEventListener('click', function() {
+                let theme = 'dark';
+                
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                    theme = 'light';
+                    
+                    // Update background for light theme
+                    const bgContainer = document.getElementById('backgroundContainer');
+                    bgContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        bgContainer.style.backgroundImage = "url('img/enterwhite.png')";
+                        bgContainer.style.opacity = '1';
+                    }, 300);
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                    theme = 'dark';
+                    
+                    // Update background for dark theme
+                    const bgContainer = document.getElementById('backgroundContainer');
+                    bgContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        bgContainer.style.backgroundImage = "url('img/enterblack.png')";
+                        bgContainer.style.opacity = '1';
+                    }, 300);
+                }
+                
+                // Save theme preference
+                localStorage.setItem('theme', theme);
+            });
+
             // Language selector functionality
             const languageButton = document.querySelector('.language-button');
             const languageDropdown = document.querySelector('.language-dropdown');
@@ -377,6 +837,7 @@
                 document.querySelector('#password').placeholder = translations[lang].auth.password;
                 document.querySelector('.login-button').textContent = translations[lang].auth.loginButton;
                 document.querySelector('.create-link').textContent = translations[lang].auth.createAccount;
+                document.querySelector('.forgot-password-link').textContent = translations[lang].auth.forgotPassword || "Забыли пароль?";
                 
                 // Update error messages
                 document.querySelector('#username').parentElement.nextElementSibling.querySelector('.error-message').textContent = translations[lang].errors.enterUsername;
@@ -432,29 +893,58 @@
                     languageDropdown.classList.remove('active');
                 });
             });
-        });
 
-        // Новая функция для обработки входа
-        function handleLogin() {
-            const passwordInput = document.getElementById('password');
-            const passwordGroup = document.getElementById('passwordGroup');
-            const loginButton = document.querySelector('.login-button');
-
-            // Проверка пароля
-            if (passwordInput.value.length < 6) {
-                passwordGroup.classList.add('error');
-                return false;
+            // Функция для создания анимации перехода между страницами
+            function setupPageTransitions() {
+                // Создаем глобальную функцию для перехода между страницами
+                window.navigateTo = function(url) {
+                    const pageTransition = document.getElementById('pageTransition');
+                    pageTransition.classList.add('active');
+                    
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 700);
+                };
+                
+                // Применяем ко всем ссылкам
+                document.querySelectorAll('a').forEach(link => {
+                    // Исключаем ссылки, которые не ведут на другие страницы или уже обработаны
+                    if (link.getAttribute('href') && 
+                        link.getAttribute('href') !== '#' && 
+                        !link.getAttribute('href').startsWith('javascript:') &&
+                        !link.classList.contains('language-option') &&
+                        !link.hasAttribute('data-transition-handled')) {
+                        
+                        link.setAttribute('data-transition-handled', 'true');
+                        link.addEventListener('click', function(e) {
+                            const href = this.getAttribute('href');
+                            // Проверяем, что это внутренняя ссылка на страницу сайта
+                            if (href && 
+                                !href.startsWith('http://') && 
+                                !href.startsWith('https://') && 
+                                !href.startsWith('mailto:') &&
+                                !href.startsWith('tel:')) {
+                                e.preventDefault();
+                                window.navigateTo(href);
+                            }
+                        });
+                    }
+                });
+                
+                // Проверяем, загружалась ли страница впервые или через переход
+                if (performance.navigation && performance.navigation.type === 0) {
+                    // Скрываем анимацию для первой загрузки
+                    const pageTransition = document.getElementById('pageTransition');
+                    pageTransition.style.display = 'none';
+                    setTimeout(() => {
+                        pageTransition.style.display = '';
+                    }, 100);
+                }
             }
-
-            // Деактивируем кнопку и меняем текст
-            loginButton.disabled = true;
-            loginButton.textContent = translations[window.currentLang || 'ru'].auth.loginButton + '...';
-
-            // Переход на страницу профиля
-            setTimeout(() => {
-                window.location.replace('profile.html');
-            }, 1000);
-        }
+            
+            // Запускаем настройку переходов
+            setupPageTransitions();
+        });
     </script>
 </body>
 </html> 

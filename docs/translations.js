@@ -26,7 +26,13 @@ const translations = {
             connecting: 'Подключение...',
             settings: 'Настройки',
             deleteAvatar: 'Удалить аватар?',
-            namePlaceholder: 'Имя Фамилия'
+            namePlaceholder: 'Имя Фамилия',
+            title: 'Профиль',
+            welcome: 'Добро пожаловать',
+            startConference: 'Начать конференцию',
+            joinConference: 'Присоединиться к конференции',
+            schedule: 'Расписание',
+            profileSettings: 'Настройки профиля'
         },
         errors: {
             enterUsername: 'Введите имя пользователя',
@@ -34,7 +40,28 @@ const translations = {
             passwordLength: 'Пароль должен содержать не менее 6 символов',
             passwordMatch: 'Пароли не совпадают',
             emailPhoneFormat: 'Допустимы только английские буквы, цифры, символы +, @, .',
-            formatHint: 'Формат: email@example.com или +79123456789'
+            formatHint: 'Формат: email@example.com или +79123456789',
+            passwordsNotMatch: 'Пароли не совпадают',
+            enterEmail: 'Введите корректный email'
+        },
+        conference: {
+            settings: 'Настройки',
+            microphone: 'Микрофон',
+            camera: 'Камера',
+            shareScreen: 'Демонстрация экрана',
+            shareScreenText: 'Демонстрация',
+            participants: 'Участники',
+            participantsText: 'Участники',
+            raiseHand: 'Поднять руку',
+            more: 'Дополнительно',
+            endCall: 'Завершить звонок',
+            handRaised: 'Вы подняли руку',
+            handLowered: 'Вы опустили руку',
+            screenShareOn: 'Демонстрация экрана включена',
+            screenShareOff: 'Демонстрация экрана выключена',
+            participantsList: 'Участники конференции',
+            teacher: 'Преподаватель',
+            you: 'Вы'
         }
     },
     en: {
@@ -64,7 +91,13 @@ const translations = {
             connecting: 'Connecting...',
             settings: 'Settings',
             deleteAvatar: 'Delete avatar?',
-            namePlaceholder: 'First Last Name'
+            namePlaceholder: 'First Last Name',
+            title: 'Profile',
+            welcome: 'Welcome',
+            startConference: 'Start Conference',
+            joinConference: 'Join Conference',
+            schedule: 'Schedule',
+            profileSettings: 'Profile Settings'
         },
         errors: {
             enterUsername: 'Enter username',
@@ -72,7 +105,28 @@ const translations = {
             passwordLength: 'Password must be at least 6 characters',
             passwordMatch: 'Passwords do not match',
             emailPhoneFormat: 'Only English letters, numbers, and symbols +, @, . are allowed',
-            formatHint: 'Format: email@example.com or +79123456789'
+            formatHint: 'Format: email@example.com or +79123456789',
+            passwordsNotMatch: 'Passwords do not match',
+            enterEmail: 'Enter a valid email'
+        },
+        conference: {
+            settings: 'Settings',
+            microphone: 'Microphone',
+            camera: 'Camera',
+            shareScreen: 'Share Screen',
+            shareScreenText: 'Share Screen',
+            participants: 'Participants',
+            participantsText: 'Participants',
+            raiseHand: 'Raise Hand',
+            more: 'More',
+            endCall: 'End Call',
+            handRaised: 'You raised your hand',
+            handLowered: 'You lowered your hand',
+            screenShareOn: 'Screen sharing enabled',
+            screenShareOff: 'Screen sharing disabled',
+            participantsList: 'Conference participants',
+            teacher: 'Teacher',
+            you: 'You'
         }
     },
     de: {
@@ -102,7 +156,13 @@ const translations = {
             connecting: 'Verbinde...',
             settings: 'Einstellungen',
             deleteAvatar: 'Avatar löschen?',
-            namePlaceholder: 'Vor- Nachname'
+            namePlaceholder: 'Vor- Nachname',
+            title: 'Profil',
+            welcome: 'Willkommen',
+            startConference: 'Konferenz starten',
+            joinConference: 'An Konferenz teilnehmen',
+            schedule: 'Zeitplan',
+            profileSettings: 'Profileinstellungen'
         },
         errors: {
             enterUsername: 'Benutzername eingeben',
@@ -110,45 +170,93 @@ const translations = {
             passwordLength: 'Passwort muss mindestens 6 Zeichen lang sein',
             passwordMatch: 'Passwörter stimmen nicht überein',
             emailPhoneFormat: 'Nur englische Buchstaben, Zahlen und Symbole +, @, . sind erlaubt',
-            formatHint: 'Format: email@example.com oder +79123456789'
+            formatHint: 'Format: email@example.com oder +79123456789',
+            passwordsNotMatch: 'Passwörter stimmen nicht überein',
+            enterEmail: 'Gültige E-Mail-Adresse eingeben'
+        },
+        conference: {
+            settings: 'Einstellungen',
+            microphone: 'Mikrofon',
+            camera: 'Kamera',
+            shareScreen: 'Bildschirm teilen',
+            shareScreenText: 'Bildschirm teilen',
+            participants: 'Teilnehmer',
+            participantsText: 'Teilnehmer',
+            raiseHand: 'Hand heben',
+            more: 'Mehr',
+            endCall: 'Anruf beenden',
+            handRaised: 'Sie haben Ihre Hand gehoben',
+            handLowered: 'Sie haben Ihre Hand gesenkt',
+            screenShareOn: 'Bildschirmfreigabe aktiviert',
+            screenShareOff: 'Bildschirmfreigabe deaktiviert',
+            participantsList: 'Konferenzteilnehmer',
+            teacher: 'Lehrer',
+            you: 'Sie'
         }
     },
     fr: {
         nav: {
-            home: 'Accueil',
-            about: 'À propos',
-            support: 'Support',
-            language: 'Langue'
+            home: "Accueil",
+            about: "À propos",
+            support: "Support",
+            language: "Langue"
         },
         auth: {
-            login: 'Connexion',
-            register: 'Inscription',
-            loginButton: 'Se connecter',
+            login: "Connexion",
+            register: "Inscription",
             registerButton: "S'inscrire",
-            createAccount: 'Créer un compte',
-            haveAccount: 'J\'ai un compte',
-            username: 'Nom d\'utilisateur',
-            password: 'Mot de passe',
-            confirmPassword: 'Confirmer le mot de passe',
-            email: 'E-mail',
-            phone: 'Téléphone',
-            emailPhone: 'E-mail / Téléphone',
-            name: 'Nom'
+            createAccount: "Créer un compte",
+            haveAccount: "J'ai un compte",
+            username: "Nom d'utilisateur",
+            password: "Mot de passe",
+            confirmPassword: "Confirmer le mot de passe",
+            email: "Email",
+            loginButton: "Se connecter",
+            rememberMe: "Se souvenir de moi",
+            forgotPassword: "Mot de passe oublié ?",
+            connecting: "Connexion..."
         },
         profile: {
-            connect: 'Se connecter',
-            connecting: 'Connexion...',
-            settings: 'Paramètres',
-            deleteAvatar: 'Supprimer l\'avatar ?',
-            namePlaceholder: 'Prénom Nom'
+            welcome: "Bienvenue",
+            connecting: "Connexion...",
+            settings: "Paramètres",
+            deleteAvatar: "Supprimer l'avatar ?",
+            namePlaceholder: "Prénom Nom",
+            title: "Profil",
+            startConference: "Démarrer une conférence",
+            joinConference: "Rejoindre une conférence",
+            schedule: "Calendrier",
+            profileSettings: "Paramètres du profil",
+            connect: "Se connecter"
         },
         errors: {
-            enterUsername: 'Entrez le nom d\'utilisateur',
-            enterPassword: 'Entrez le mot de passe',
-            passwordLength: 'Le mot de passe doit contenir au moins 6 caractères',
-            passwordMatch: 'Les mots de passe ne correspondent pas',
-            emailPhoneFormat: 'Seuls les lettres anglaises, les chiffres et les symboles +, @, . sont autorisés',
-            formatHint: 'Format: email@example.com ou +79123456789'
+            enterUsername: "Entrez un nom d'utilisateur",
+            enterPassword: "Entrez le mot de passe",
+            passwordLength: "Le mot de passe doit contenir au moins 6 caractères",
+            passwordMatch: "Les mots de passe ne correspondent pas",
+            emailPhoneFormat: "Seuls les lettres anglaises, les chiffres et les symboles +, @, . sont autorisés",
+            formatHint: "Format: email@example.com ou +79123456789",
+            passwordsNotMatch: "Les mots de passe ne correspondent pas",
+            enterEmail: "Entrez un email valide"
+        },
+        conference: {
+            settings: "Paramètres",
+            microphone: "Microphone",
+            camera: "Caméra",
+            shareScreen: "Partager l'écran",
+            shareScreenText: "Partager l'écran",
+            participants: "Participants",
+            participantsText: "Participants",
+            raiseHand: "Lever la main",
+            more: "Plus",
+            endCall: "Terminer l'appel",
+            handRaised: "Vous avez levé la main",
+            handLowered: "Vous avez baissé la main",
+            screenShareOn: "Partage d'écran activé",
+            screenShareOff: "Partage d'écran désactivé",
+            participantsList: "Participants à la conférence",
+            teacher: "Enseignant",
+            you: "Vous"
         }
     }
 };
